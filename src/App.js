@@ -31,7 +31,7 @@ function App() {
       .then(res => {
         if (res.ok) {
           console.log(res.body);
-          res.json();
+          return res.json();
         }
       })
       .then(data => {
