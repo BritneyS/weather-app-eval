@@ -10,6 +10,11 @@ function App() {
     lat: null,
     lon: null
   });
+  const [weatherCondition, setWeatherCondition] = useState({
+    condition: null,
+    description: null
+  });
+
   function locationSuccess(positionObj) {
     console.log(`${positionObj.coords.latitude}. ${positionObj.coords.longitude}`);
     setCoordinates({
@@ -35,7 +40,11 @@ function App() {
         }
       })
       .then(data => {
-        console.log(data);
+        console.log(`Data: ${data}`);
+        setWeatherCondition({
+          condition: data.weather[0].main,
+          description: data.weather[0].description
+        });
       })
       .catch (err => {
         console.log(err);
@@ -43,9 +52,10 @@ function App() {
   },[coordinates])
 
   return (
-    <div className="App">
-      Hi
-    </div>
+    <section className="App">
+      <div>{weatherCondition.condition}</div>
+      <div>{weatherCondition.description}</div>
+    </section>
   );
 }
 
